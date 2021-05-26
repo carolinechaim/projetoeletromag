@@ -1,0 +1,16 @@
+
+ganho = array
+for n = linspace(0.05,0.5)
+    array.ElementSpacing = n
+end 
+
+
+
+
+ganho      = sparameters(array, freq_list);
+ganho
+
+
+
+
+rfplot(ganho,2,1,'abs')
