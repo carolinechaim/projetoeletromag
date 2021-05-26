@@ -1,6 +1,6 @@
 freq_list = linspace(1000000,10000000,200);
 
-z_list = impedance(ant,freq_list);
+z_list = impedance(antena_transmissora,freq_list);
 
 index = 0;
 for n = z_list
@@ -12,4 +12,4 @@ for n = z_list
 
 end 
 
-freq = freq_list(index)
+freq_ressonancia = freq_list(index)
