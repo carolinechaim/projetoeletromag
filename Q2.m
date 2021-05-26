@@ -1,16 +1,15 @@
-frequencia = linspace(1000000,10000000,200);
+freq_list = linspace(1000000,10000000,200);
 
-z = impedance(ant,frequencia);
+z_list = impedance(ant,freq_list);
 
-
-freq = 0;
-
-for n = z
-     a = imag(n)
+index = 0;
+for n = z_list
+     a = imag(n);
      if a >= -0.999 && a <= 0.999
-         freq = n
+         index = find(z_list(:,:)== n)
          break
      end 
 
 end 
 
+freq = freq_list(index)
