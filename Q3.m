@@ -3,5 +3,5 @@ antena_receptora =  spiralArchimedean('NumArms',1,'Tilt',90,'TiltAxis','Y','Turn
 
 array = linearArray('Element',antena_receptora,'Element',antena_transmissora)
 
-array.ElementSpacing = 0.3
+array.ElementSpacing = 0.3;
 show (array)
