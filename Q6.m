@@ -11,7 +11,7 @@ for i=1:iterations
 end 
 
 
-s = surf(freq_list,distance,transpose(gain))
+s = surf(freq_list,distance,transpose(gain));
 s.EdgeColor = 'none';
 s.FaceColor = 'interp';
 colorbar;
