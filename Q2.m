@@ -1,3 +1,5 @@
+run('Q1.m');
+
 freq_list = linspace(1000000,10000000,200);
 
 z_list = impedance(antena_transmissora,freq_list);

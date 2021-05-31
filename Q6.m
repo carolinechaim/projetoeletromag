@@ -1,3 +1,4 @@
+run('Q5.m');
 
 iterations = 10;
 distance = linspace(0.05,0.5,iterations);
