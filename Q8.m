@@ -1,9 +1,7 @@
 iterations = 100;
 
 sigma_list = linspace(10,30,iterations);
-
 freq_list = linspace(1000000,10000000,iterations);
-
 Z_list_imag = zeros(iterations,iterations);
 
 for m=1:iterations
@@ -17,6 +15,27 @@ for m=1:iterations
         Z_list_imag(m,n) = imag(Zantena);   
     end 
 end
+
+index_resso = 0;
+index_crit = 0;
+prev =0;
+
+for m = 1:iterations
+    for n = 1:iterations
+         a = Z_list_imag(m,n);
+         if prev <= 0 && a >= 0
+             index_ress = find(z_list(:,:)== n);
+         end
+
+         if prev >= 0 && a <= 0
+             index_crit = find(z_list(:,:)== n);
+         end 
+         prev = a;
+    end 
+end
+
+freq_ressonancia = freq_list(index_ress)
+freq_critica = freq_list(index_crit)
 
 % Calcula e armazena a diferença entre as frequencias obtidas e as reais
 diff_ress = abs(Z_list_imag - freq_ressonancia);

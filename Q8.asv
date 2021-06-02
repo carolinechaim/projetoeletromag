@@ -6,48 +6,45 @@ freq_list = linspace(1000000,10000000,iterations);
 
 Z_list_imag = zeros(iterations,iterations);
 
-diff_ress = zeros(iterations,1);
-diff_crit = zeros(iterations,1);
-
-
 for m=1:iterations
     sigma = sigma_list(m);
     L = sigma/freq_critica;
     C = 1/(sigma*freq_critica);
     
-    index_ress = 0;
-    index_crit = 0;
-    prev =0;
-    
     for n=1:iterations
         w = freq_list(n);
-
-        Zantena = ( (1j*w*L)*(1/(1j*w*C)) )/( 1j*w*L+((1/(1j*w*C))) ) + 4*1j*w*L;
-
-        a = imag(Zantena);
-        
-        Z_list_imag(m,n) = a;
-        
-    end
+        Zantena = ( (1j*w*L)*(1/(1j*w*C)) )/( 1j*w*L+((1/(1j*w*C))) ) + 4*1j*w*L;        
+        Z_list_imag(m,n) = imag(Zantena);   
+    end 
     
 end
-for m,n = Z_list_imag
-% Encontra o valor da freq ressonância
-         if a >= -0.999 && a <= 0.999
+
+index_resso = 0;
+index_crit = 0;
+prev =0;
+for m = 1:iterations
+    for n = 1:iterations
+         a = Z_list_imag(m,n);
+         if prev <= 0 && a >= 0
              index_ress = find(z_list(:,:)== n);
          end
-         % Encontra o valor da freq crítica
+
          if prev >= 0 && a <= 0
              index_crit = find(z_list(:,:)== n);
          end 
          prev = a;
-    % encontra as frequencias de ressonância e crítica
-    w_ress = freq_list(index_ress);
-    w_crit = freq_list(index_crit);
-    % Calcula e armazena a diferença entre as frequencias obtidas e as
-    % reais
-    diff_ress(m) = abs(w_ress - freq_ressonancia);
-    diff_crit(m) = abs(w_crit - freq_critica);
+    end 
+end
+
+freq_ressonancia = freq_list(index_ress)
+freq_critica = freq_list(index_crit)
+
+% Calcula e armazena a diferença entre as frequencias obtidas e as reais
+diff_ress = abs(Z_list_imag - freq_ressonancia);
+diff_crit = abs(Z_list_imag - freq_critica);
+
+min(diff_ress)
+min(diff_crit)
 
 index_freq_ress = find(diff_ress(:)== min(diff_ress));
 index_freq_crit = find(diff_crit(:)== min(diff_crit));
