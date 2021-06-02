@@ -1,6 +1,6 @@
-iterations = 100;
+iterations = 1000;
 
-sigma_list = linspace(10,30,iterations);
+sigma_list = linspace(1,30,iterations);
 freq_list = linspace(1000000,10000000,iterations);
 Z_list_imag = zeros(iterations,iterations);
 
@@ -16,37 +16,35 @@ for m=1:iterations
     end 
 end
 
-index_resso = 0;
-index_crit = 0;
+freq_ress_list = zeros(iterations,1);
+freq_crit_list = zeros(iterations,1);
 prev =0;
 
 for m = 1:iterations
     for n = 1:iterations
          a = Z_list_imag(m,n);
          if prev <= 0 && a >= 0
-             index_ress = find(z_list(:,:)== n);
+             index_ress = find(Z_list_imag(:,n)== a);
+             freq_ress_list(m) = freq_list(index_ress);
          end
 
          if prev >= 0 && a <= 0
-             index_crit = find(z_list(:,:)== n);
+             index_crit = find(Z_list_imag(:,n)== a);
+             freq_crit_list(m) = freq_list(index_crit);
          end 
          prev = a;
-    end 
+    end
 end
 
-freq_ressonancia = freq_list(index_ress)
-freq_critica = freq_list(index_crit)
-
 % Calcula e armazena a diferença entre as frequencias obtidas e as reais
-diff_ress = abs(Z_list_imag - freq_ressonancia);
-diff_crit = abs(Z_list_imag - freq_critica);
+diff_ress = abs(freq_ress_list - freq_ressonancia);
+diff_crit = abs(freq_crit_list - freq_critica);
 
-min(diff_ress)
-min(diff_crit)
+index_freq_ress = find(diff_ress(:)== min(diff_ress))
+index_freq_crit = find(diff_crit(:)== min(diff_crit))
 
-index_freq_ress = find(diff_ress(:)== min(diff_ress));
-index_freq_crit = find(diff_crit(:)== min(diff_crit));
-
+freq_ress_val = freq_list(index_freq_ress);
+freq_crit_val = freq_list(index_freq_crit);
 
 s = surf(freq_list,sigma_list,Z_list_imag);
 s.EdgeColor = 'none';
