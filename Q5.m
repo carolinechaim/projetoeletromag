@@ -1,4 +1,4 @@
-%run('Q4.m');
+run('Q4.m');
 
 rfplot(ganho,2,1,'abs')
 
