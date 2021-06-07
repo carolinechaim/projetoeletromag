@@ -1,0 +1,5 @@
+syms M
+w = freq_ress_sim;
+G_M_function =  ( (1j*w*M)/(Rc))^2
+
+F = taylor(M, G_M_function, 'Order', 5)
