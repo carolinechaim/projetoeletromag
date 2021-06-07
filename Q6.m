@@ -1,9 +1,9 @@
 run('Q5.m');
 spacing = 10;
-distance = linspace(0.05,0.5,iterations);
+distance = linspace(0.05,0.5,iterations/spacing);
 gain = zeros(iterations,iterations/spacing);
 
-for i=1:length(distance)/spacing:length(distance)
+for i=1:length(distance)
     n=distance(i);
     array.ElementSpacing = n;
     ganho = sparameters(array, freq_list);

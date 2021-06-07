@@ -1,5 +1,5 @@
 run('Q1.m');
-iterations = 10;
+iterations = 200;
 freq_list = linspace(1000000,10000000,iterations);
 impedance(antena_transmissora,freq_list)
 z_list = impedance(antena_transmissora,freq_list);
@@ -20,6 +20,6 @@ for n = z_list
      prev = a;
 end 
 
-freq_ressonancia = freq_list(index_ress);
-freq_critica = freq_list(index_crit);
+freq_ressonancia = freq_list(1,index_ress);
+freq_critica = freq_list(1,index_crit);
 
