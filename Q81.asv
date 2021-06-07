@@ -21,13 +21,14 @@ for n = 1:iterations
     if prev <= 0 && a >= 0
         index_ress_sim = find(Z_list_imag(:,1) == a);
     end
+    
     if prev >= 0 && a <= 0
         index_crit_sim = find(Z_list_imag(:,1) == a);
     end 
     prev = a;
 end
 
-freq_ress_sim = freq_list_sim(index_ress_sim);
-freq_crit_sim = freq_list_sim(index_crit_sim);
+freq_ress_sim = freq_list_sim(index_ress_sim)
+freq_crit_sim = freq_list_sim(index_crit_sim)
 
 plot(freq_list_sim, Z_list_imag)

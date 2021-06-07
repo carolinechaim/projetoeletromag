@@ -1,4 +1,4 @@
-iterations = 1000;
+run('Q6.m');
 
 sigma_list = linspace(1,30,iterations);
 freq_list = linspace(1000000,10000000,iterations);
@@ -36,19 +36,9 @@ for m = 1:iterations
     end
 end
 
-% Calcula e armazena a diferença entre as frequencias obtidas e as reais
-diff_ress = abs(freq_ress_list - freq_ressonancia);
-diff_crit = abs(freq_crit_list - freq_critica);
-
-index_freq_ress = find(diff_ress(:)== min(diff_ress))
-index_freq_crit = find(diff_crit(:)== min(diff_crit))
-
-freq_ress_val = freq_list(index_freq_ress);
-freq_crit_val = freq_list(index_freq_crit);
-
-s = surf(freq_list,sigma_list,Z_list_imag);
-s.EdgeColor = 'none';
+s = surf(freq_list, sigma_list, Z_list_imag);
 s.FaceColor = 'interp';
+s.EdgeColor = 'none';
 colorbar;
 xlabel("Frequência");
 ylabel("Sigma");
